@@ -8,7 +8,7 @@ export function useTodoApp() {
   const { tasks, loading, error, addTask, editTask, toggleStatus, removeTask } =
     useTasks();
   const { formOpen, editingTask, openForm, closeForm } = useTaskForm();
-  const [view, setView] = useState<'home' | 'search'>('home');
+  const [view, setView] = useState<'home' | 'search' | 'weeks'>('home');
 
   // Create or update (TaskForm shows any error thrown here)
   const handleSave = async (data: TaskInput) => {

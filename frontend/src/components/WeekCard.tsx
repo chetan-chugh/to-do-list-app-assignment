@@ -11,16 +11,16 @@ interface Props {
 // Summary card for one week. Click it to expand and show that week's tasks.
 export default function WeekCard({ week, expanded, onToggle, children }: Props) {
   return (
-    <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200/80">
+    <div className="rounded-2xl bg-white p-4 shadow-sm outline outline-1 outline-slate-200/80">
       <button
         onClick={onToggle}
-        className="flex w-full items-center justify-between text-left"
+        className="flex w-full cursor-pointer items-center justify-between border-0 bg-transparent text-left"
       >
         <div>
           <h2 className="font-semibold text-slate-900">
             {week.label}
             {week.isCurrent && (
-              <span className="ml-2 rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-800">
+              <span className="ml-2 rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-medium text-indigo-700">
                 This week
               </span>
             )}
