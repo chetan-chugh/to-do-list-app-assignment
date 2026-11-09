@@ -11,12 +11,20 @@ import DeleteTaskDialog from './components/DeleteTaskDialog';
 import { Task } from './types/task';
 
 export default function App() {
-  const [started, setStarted] = useState(
-    () => window.localStorage.getItem('todo-app-started') === 'true'
-  );
+  const [started, setStarted] = useState(() => {
+    try {
+      return window.localStorage.getItem('todo-app-started') === 'true';
+    } catch {
+      return false;
+    }
+  });
 
   const handleGetStarted = () => {
-    window.localStorage.setItem('todo-app-started', 'true');
+    try {
+      window.localStorage.setItem('todo-app-started', 'true');
+    } catch {
+      // Storage may be disabled; keep the app usable for this session.
+    }
     setStarted(true);
   };
 
@@ -51,6 +59,7 @@ function TodoApp() {
         loading={app.loading}
         tasks={app.tasks}
         taskActions={taskActions}
+        onViewAll={() => app.setView('weeks')}
       />
 
       <AddTaskButton onClick={() => app.openForm()} />

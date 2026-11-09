@@ -1,11 +1,11 @@
 interface Props {
-  view: 'home' | 'search';
+  view: 'home' | 'search' | 'weeks';
   onOpenSearch: () => void;
   onBack: () => void;
 }
 
 export default function Header({ view, onOpenSearch, onBack }: Props) {
-  if (view === 'search') {
+  if (view !== 'home') {
     return (
       <header className="app-header app-header-search">
         <button
@@ -18,7 +18,7 @@ export default function Header({ view, onOpenSearch, onBack }: Props) {
             <path strokeLinecap="round" strokeLinejoin="round" d="m14 18-6-6 6-6M8 12h12" />
           </svg>
         </button>
-        <h1>Find a task</h1>
+        <h1>{view === 'search' ? 'Find a task' : 'All weeks'}</h1>
       </header>
     );
   }
@@ -26,14 +26,14 @@ export default function Header({ view, onOpenSearch, onBack }: Props) {
   return (
     <header className="app-header">
       <div>
-        <p className="eyebrow">YOUR DAY, ORGANIZED</p>
+        <p className="eyebrow max-[480px]:whitespace-nowrap max-[480px]:text-[8px] max-[480px]:tracking-[0.09em]">YOUR DAY, ORGANIZED</p>
         <h1>My Tasks</h1>
       </div>
       <button
         type="button"
         onClick={onOpenSearch}
         aria-label="Search tasks"
-        className="search-trigger"
+        className="search-trigger max-[480px]:w-[55%] max-[480px]:min-w-0 max-[480px]:shrink"
       >
         <span>Search for a task</span>
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">

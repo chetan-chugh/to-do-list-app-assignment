@@ -554,7 +554,6 @@ button {
   min-height: 64px;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid #eff0f4;
 }
 
 .task-checkbox {
@@ -755,12 +754,7 @@ button {
     font-size: 23px;
   }
 
-  .eyebrow {
-    font-size: 9px;
-  }
-
   .search-trigger {
-    width: 55%;
     min-height: 44px;
     padding: 0 10px;
     font-size: 11px;
@@ -811,9 +805,7 @@ button {
     font-size: 25px;
   }
 
-  .summary-count span {
-    font-size: 11px;
-  }
+  .summary-count span { font-size: 11px; }
 
   .section-heading h2 {
     font-size: 16px;

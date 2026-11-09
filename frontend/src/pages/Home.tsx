@@ -7,6 +7,7 @@ interface Props {
   onToggle: (task: Task) => void;
   onEdit: (task: Task) => void;
   onDelete: (task: Task) => void;
+  onViewAll: () => void;
 }
 
 const startOfWeek = (date: Date) => {
@@ -21,7 +22,7 @@ const sameDay = (first: Date, second: Date) =>
   first.getMonth() === second.getMonth() &&
   first.getDate() === second.getDate();
 
-export default function Home({ tasks, onToggle, onEdit, onDelete }: Props) {
+export default function Home({ tasks, onToggle, onEdit, onDelete, onViewAll }: Props) {
   const today = useMemo(() => new Date(), []);
   const [selectedDate, setSelectedDate] = useState(today);
   const weekDays = useMemo(() => {
@@ -75,7 +76,7 @@ export default function Home({ tasks, onToggle, onEdit, onDelete }: Props) {
           </div>
           <div className="summary-count">
             {completedCount.toString().padStart(2, '0')}
-            <span>This Week</span>
+            <span className="whitespace-nowrap">This Week</span>
           </div>
         </article>
         <article className="summary-card summary-pending">
@@ -85,7 +86,7 @@ export default function Home({ tasks, onToggle, onEdit, onDelete }: Props) {
           </div>
           <div className="summary-count">
             {pendingCount.toString().padStart(2, '0')}
-            <span>This Week</span>
+            <span className="whitespace-nowrap">This Week</span>
           </div>
         </article>
       </section>
@@ -110,7 +111,10 @@ export default function Home({ tasks, onToggle, onEdit, onDelete }: Props) {
       <section className="tasks-section">
         <div className="section-heading">
           <h2>{isToday ? 'Tasks Today' : `Tasks ${dayLabel}`}</h2>
-          <span className="task-count">{selectedTasks.length} {selectedTasks.length === 1 ? 'task' : 'tasks'}</span>
+          <div className="flex items-center gap-3.5">
+            <span className="task-count">{selectedTasks.length} {selectedTasks.length === 1 ? 'task' : 'tasks'}</span>
+            <button type="button" className="cursor-pointer border-0 bg-transparent px-0 py-1 text-xs font-semibold text-[#3f5de4] hover:text-[#253ca9] hover:underline focus-visible:outline-2 focus-visible:outline-[#4563eb] focus-visible:outline-offset-[3px]" onClick={onViewAll}>View All</button>
+          </div>
         </div>
 
         {selectedTasks.length > 0 ? (
