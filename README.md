@@ -13,6 +13,5 @@ npm run dev
 # Frontend 
 cd frontend
 npm install
-cp .env.example .env       
 npm run dev               
 ```
