@@ -11,18 +11,13 @@ export interface TaskActions {
 
 interface Props {
   view: 'home' | 'search' | 'weeks';
-  loading: boolean;
   tasks: Task[];
   taskActions: TaskActions;
   onViewAll: () => void;
 }
 
 // Main area: shows Loading, the Home screen, or the Search screen
-export default function TaskContent({ view, loading, tasks, taskActions, onViewAll }: Props) {
-  if (loading) {
-    return <p className="mt-16 text-center text-slate-500">Loading...</p>;
-  }
-
+export default function TaskContent({ view, tasks, taskActions, onViewAll }: Props) {
   if (view === 'search') {
     return <Search tasks={tasks} {...taskActions} />;
   }

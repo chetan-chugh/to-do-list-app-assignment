@@ -136,7 +136,7 @@ export default function TaskForm({ task, onSave, onDelete, onClose }: Props) {
             <button
               type="button"
               onClick={() => onDelete(task)}
-              className="rounded-lg border border-rose-200 px-4 py-2 text-sm font-medium text-rose-700 transition-colors hover:bg-rose-50"
+              className="cursor-pointer rounded-lg border border-rose-200 px-4 py-2 text-sm font-medium text-rose-700 transition-colors hover:bg-rose-50"
             >
               Delete
             </button>
@@ -144,7 +144,7 @@ export default function TaskForm({ task, onSave, onDelete, onClose }: Props) {
           <button
             type="submit"
             disabled={saving}
-            className="task-form-submit flex-1 rounded-lg py-3 text-sm font-semibold text-white transition-colors disabled:opacity-50"
+            className="task-form-submit flex-1 cursor-pointer rounded-lg py-3 text-sm font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50"
           >
             {saving ? 'Saving...' : task ? 'Save changes' : 'Create task'}
           </button>

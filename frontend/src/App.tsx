@@ -8,23 +8,13 @@ import AddTaskButton from './components/AddTaskButton';
 import TaskForm from './components/TaskForm';
 import Onboarding from './components/Onboarding';
 import DeleteTaskDialog from './components/DeleteTaskDialog';
+import LoadingSkeleton from './components/LoadingSkeleton';
 import { Task } from './types/task';
 
 export default function App() {
-  const [started, setStarted] = useState(() => {
-    try {
-      return window.localStorage.getItem('todo-app-started') === 'true';
-    } catch {
-      return false;
-    }
-  });
+  const [started, setStarted] = useState(false);
 
   const handleGetStarted = () => {
-    try {
-      window.localStorage.setItem('todo-app-started', 'true');
-    } catch {
-      // Storage may be disabled; keep the app usable for this session.
-    }
     setStarted(true);
   };
 
@@ -44,6 +34,10 @@ function TodoApp() {
     onDelete: setTaskToDelete,
   };
 
+  if (app.loading) {
+    return <LoadingSkeleton />;
+  }
+
   return (
     <Layout>
       <Header
@@ -56,7 +50,6 @@ function TodoApp() {
 
       <TaskContent
         view={app.view}
-        loading={app.loading}
         tasks={app.tasks}
         taskActions={taskActions}
         onViewAll={() => app.setView('weeks')}

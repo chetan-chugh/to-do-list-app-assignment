@@ -545,8 +545,40 @@ button {
   color: #3f5de4 !important;
 }
 
+.week-card-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  padding-top: 0;
+  opacity: 0;
+  transition: grid-template-rows 260ms ease, padding-top 260ms ease, opacity 180ms ease;
+}
+
+.week-card-content.is-expanded {
+  grid-template-rows: 1fr;
+  padding-top: 16px;
+  opacity: 1;
+}
+
+.week-card-content-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .week-card-content,
+  .week-card-chevron {
+    transition: none;
+  }
+}
+
 .task-list {
-  border-top: 1px solid #eff0f4;
+  overflow: hidden;
+  border: 1px solid #eff0f4;
+  border-radius: 8px;
+}
+
+.task-list > article:last-child {
+  border-bottom: 0;
 }
 
 .task-row {
@@ -560,8 +592,10 @@ button {
   display: grid;
   width: 21px;
   height: 21px;
+  align-self: flex-start;
   flex: none;
   place-items: center;
+  margin-top: 10px;
   padding: 0;
   border: 1px solid #8da1ff;
   border-radius: 3px;
@@ -706,7 +740,6 @@ button {
 }
 
 .add-task-fab span {
-  margin-top: -3px;
   font-size: 32px;
   font-weight: 300;
   line-height: 1;

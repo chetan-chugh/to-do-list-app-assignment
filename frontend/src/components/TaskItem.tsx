@@ -36,7 +36,7 @@ export default function TaskItem({ task, onToggle, onEdit, onDelete }: Props) {
   return (
     <article className="relative touch-pan-y overflow-hidden border-b border-[#eff0f4]" onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerCancel={() => { pointerStart.current = null; }}>
       <button type="button" className="absolute inset-y-0 right-0 z-0 w-[82px] cursor-pointer border-0 bg-[#d54d5a] text-[13px] font-semibold text-white" onClick={() => { setSwiped(false); onDelete(task); }}>Delete</button>
-      <div className={`task-row relative z-[1] border-b-0 bg-white px-0.5 transition-transform duration-200 ${swiped ? '-translate-x-[82px]' : 'translate-x-0'}`}>
+      <div className={`task-row relative z-[1] border-b-0 bg-white px-3 transition-transform duration-200 ${swiped ? '-translate-x-[82px]' : 'translate-x-0'}`}>
       <button
         type="button"
         aria-label={completed ? 'Mark as in progress' : 'Mark as completed'}
@@ -53,11 +53,9 @@ export default function TaskItem({ task, onToggle, onEdit, onDelete }: Props) {
       >
         <span className="task-title">{task.title}</span>
         <span className="block w-full overflow-hidden text-ellipsis whitespace-nowrap text-[11px] font-normal leading-[1.35] text-[#858b9b]" title={task.description}>{task.description || 'No description'}</span>
-        <span className="flex w-full items-center justify-between gap-1.5">
-          <span className="task-time">{formatDateTime(task.dueDate)}</span>
-          <span className={`flex-none rounded-full px-[7px] py-0.5 text-[10px] font-semibold leading-[1.4] ${task.priority === 'High' ? 'bg-[#fff0f0] text-[#c43e4b]' : task.priority === 'Medium' ? 'bg-[#fff6e5] text-[#9a6400]' : 'bg-[#eef0ff] text-[#3f5de4]'}`}>{task.priority}</span>
-        </span>
+        <span className="task-time">{formatDateTime(task.dueDate)}</span>
       </button>
+      <span className={`task-priority flex-none rounded-full px-[7px] py-0.5 text-[10px] font-semibold leading-[1.4] ${task.priority === 'High' ? 'bg-[#fff0f0] text-[#c43e4b]' : task.priority === 'Medium' ? 'bg-[#fff6e5] text-[#9a6400]' : 'bg-[#eef0ff] text-[#3f5de4]'}`}>{task.priority}</span>
       <div className="task-actions">
         <button
           type="button"
