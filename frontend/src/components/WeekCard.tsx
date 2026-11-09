@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { WeekGroup } from '../types/task';
 
 interface Props {
@@ -10,10 +10,19 @@ interface Props {
 
 // Summary card for one week. Click it to expand and show that week's tasks.
 export default function WeekCard({ week, expanded, onToggle, children }: Props) {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    contentRef.current?.toggleAttribute('inert', !expanded);
+  }, [expanded]);
+
   return (
     <div className="rounded-2xl bg-white p-4 shadow-sm outline outline-1 outline-slate-200/80">
       <button
+        type="button"
         onClick={onToggle}
+        aria-expanded={expanded}
+        aria-controls={`week-content-${week.key}`}
         className="flex w-full cursor-pointer items-center justify-between border-0 bg-transparent text-left"
       >
         <div>
@@ -31,10 +40,28 @@ export default function WeekCard({ week, expanded, onToggle, children }: Props) 
             <span className="font-semibold text-emerald-700">{week.completed}</span> Completed
           </p>
         </div>
-        <span className="text-slate-400">{expanded ? '▲' : '▼'}</span>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`week-card-chevron h-5 w-5 flex-none text-slate-400 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       </button>
 
-      {expanded && <div className="mt-4 space-y-3">{children}</div>}
+      <div
+        ref={contentRef}
+        id={`week-content-${week.key}`}
+        className={`week-card-content${expanded ? ' is-expanded' : ''}`}
+        aria-hidden={!expanded}
+      >
+        <div className="week-card-content-inner space-y-3">{children}</div>
+      </div>
     </div>
   );
 }
